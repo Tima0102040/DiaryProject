@@ -1,0 +1,59 @@
+@model IEnumerable<Project.Models.Admin>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<button type="button" class="btn btn-primary">
+    <a asp-action="Create" class="nav-link">Create New</a>
+</button>
+<br>
+<br>
+<table class="table table-hover" style="color:#FFBF00; padding-top: 10px">
+    <thead>
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.AdminId)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.AdminEmail)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.AdminLogin)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.AdminPassword)
+        </th>
+        
+        <th scope="col">
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminPassword)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AdminId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AdminId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AdminId">Delete</a>
+                </td>
+            
+        </tr>
+    }
+    </tbody>
+</table>
