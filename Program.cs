@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DiaryProjectContext>(options => options.UseSqlServer("name=DefaultConnection"));
+builder.Services.AddDbContext<DiaryProjectContext>(options => options.UseLazyLoadingProxies().UseSqlServer("name=DefaultConnection"));
 builder.Services.AddAuthentication();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -16,8 +16,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
         options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
     });
- 
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews(options =>
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 
 var app = builder.Build();
 

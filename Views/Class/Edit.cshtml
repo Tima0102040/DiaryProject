@@ -1,0 +1,54 @@
+@model Project.Models.Admin
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Admin</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AdminId" />
+            <div>
+                <label asp-for="AdminEmail" class="form-label mt-4"></label>
+                <select asp-for="AdminEmail" class="form-select" asp-items="@(new SelectList(ViewBag.Classes, "ClassId", "ClassName"))">
+                    <option value="">Select Class</option>
+                </select>
+                <span asp-validation-for="AdminEmail" class="text-danger"></span>
+                        
+            </div>
+            
+            <div >
+                
+                <label asp-for="AdminEmail" class="form-label mt-4">Email address</label>
+                <input asp-for="AdminEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <span asp-validation-for="AdminEmail" class="text-danger"></span>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+                    <div>
+                        <label asp-for="AdminLogin" class="form-label mt-4" >Login</label>
+                        <input asp-for="AdminLogin" class="form-control" placeholder="Login" />
+                        <span asp-validation-for="AdminLogin" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="AdminPassword" class="form-label mt-4" for="inputDefault">Default input</label>
+                          <input asp-for="AdminPassword" type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                    </div>
+                        
+                    <br>
+                    <div class="form-group">
+                        <input type="submit" value="Save"  class="btn btn-primary" />
+                        <button type="button" class="btn btn-link" style="float: right"><a asp-action="Index">Back to List</a></button>
+                    </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

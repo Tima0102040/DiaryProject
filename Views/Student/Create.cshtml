@@ -1,0 +1,62 @@
+@model Project.Models.Student
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Class</h4>
+
+<form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div >
+        <label asp-for="StudentEmail" class="form-label mt-4">Email address</label>
+        <input asp-for="StudentEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <span asp-validation-for="StudentEmail" class="text-danger"></span>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div >
+        <label asp-for="StudentFullName" class="form-label mt-4">Full Name</label>
+        <input asp-for="StudentFullName" type="text" class="form-control" id="inputDefault" placeholder="FullName">
+        <span asp-validation-for="StudentFullName" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="StudentBirthDate" class="form-label mt-4" for="birthday">Default input</label>
+        <input asp-for="StudentBirthDate" type="date" class="form-control" placeholder="Default input" id="birthday">
+        <span asp-validation-for="StudentBirthDate" class="text-danger"></span>
+    </div>
+    
+    <div>
+        <label asp-for="ClassId" class="form-label mt-4"></label>
+        <select asp-for="ClassId" class="form-select" asp-items="@(new SelectList(ViewBag.Classes, "ClassId", "ClassName"))">
+            <option value="">Select Class</option>
+        </select>
+        <span asp-validation-for="ClassId" class="text-danger"></span>
+            
+    </div>
+
+    <div>
+        <label asp-for="StudentLogin" class="form-label mt-4" >Login</label>
+        <input asp-for="StudentLogin" class="form-control" placeholder="Login" />
+        <span asp-validation-for="StudentLogin" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="StudentPassword" class="form-label mt-4" for="inputDefault">Password</label>
+        <input asp-for="StudentPassword" type="text" class="form-control" placeholder="Default input" id="inputDefault">
+    </div>
+    
+            
+        <br>
+        <div class="form-group">
+            <input type="submit" value="Create"  class="btn btn-primary" />
+            <button type="button" class="btn btn-link" style="float: right"><a asp-action="Index">Back to List</a></button>
+        </div>
+
+    </form>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

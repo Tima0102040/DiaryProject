@@ -1,0 +1,40 @@
+@model Project.Models.Class
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Admin</h4>
+
+<form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+            <label asp-for="ClassName" class="form-label mt-4" >Class Name</label>
+            <input asp-for="ClassName" class="form-control" placeholder="Login" />
+            <span asp-validation-for="ClassName" class="text-danger"></span>
+        </div>
+    <div>
+        <label asp-for="TeacherId" class="form-label mt-4"></label>
+        <select asp-for="TeacherId" multiple="" class="form-select" asp-items="@(new SelectList(ViewBag.Teachers, "TeacherId", "TeacherFullName"))">
+            <option value="">Select Class</option>
+        </select>
+        <span asp-validation-for="TeacherId" class="text-danger"></span>
+                    
+    </div>
+    
+            
+        <br>
+        <div class="form-group">
+            <input type="submit" value="Create"  class="btn btn-primary" />
+            <button type="button" class="btn btn-link" style="float: right"><a asp-action="Index">Back to List</a></button>
+        </div>
+
+    </form>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

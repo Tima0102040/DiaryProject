@@ -21,7 +21,7 @@ public partial class DiaryProjectContext : DbContext
     public DbSet<User> User { get; set; }
     public DbSet<Role> Role { get; set; }
 
-    public virtual DbSet<Class> Classes { get; set; }
+    public virtual DbSet<Class> Class { get; set; }
 
     public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
 
@@ -29,11 +29,11 @@ public partial class DiaryProjectContext : DbContext
 
     public virtual DbSet<Mark> Marks { get; set; }
 
-    public virtual DbSet<Student> Students { get; set; }
+    public virtual DbSet<Student> Student { get; set; }
 
     public virtual DbSet<Subject> Subjects { get; set; }
 
-    public virtual DbSet<Teacher> Teachers { get; set; }
+    public virtual DbSet<Teacher> Teacher { get; set; }
 
     public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; }
 
@@ -129,8 +129,7 @@ public partial class DiaryProjectContext : DbContext
 
             entity.HasOne(d => d.Class).WithMany(p => p.Students)
                 .HasForeignKey(d => d.ClassId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ClassId");
+                .HasConstraintName("FK__Student__ClassId__6E01572D");
         });
 
         modelBuilder.Entity<Subject>(entity =>
@@ -151,7 +150,7 @@ public partial class DiaryProjectContext : DbContext
             entity.Property(e => e.TeacherEmail).HasMaxLength(1);
             entity.Property(e => e.TeacherLogin).HasMaxLength(1);
             entity.Property(e => e.TeacherPassword).HasMaxLength(1);
-            entity.Property(e => e.TecherFullName).HasMaxLength(1);
+            entity.Property(e => e.TeacherFullName).HasMaxLength(1);
         });
 
         modelBuilder.Entity<TeacherSubject>(entity =>

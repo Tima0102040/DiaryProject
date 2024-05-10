@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.Models;
 
 public partial class Teacher
 {
+    [Display(Name="ID")]
     public int TeacherId { get; set; }
 
-    public string TecherFullName { get; set; } = null!;
+    [Display(Name="Teacher Name")]
+    public string TeacherFullName { get; set; } = null!;
 
+    [Display(Name="Email")]
     public string TeacherEmail { get; set; } = null!;
 
+    [Display(Name="Login")]
     public string TeacherLogin { get; set; } = null!;
 
     public string TeacherPassword { get; set; } = null!;

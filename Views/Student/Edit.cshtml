@@ -1,0 +1,47 @@
+@model Project.Models.Teacher
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Admin</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TeacherId" />
+            <div >
+                        <label asp-for="TeacherEmail" class="form-label mt-4">Email address</label>
+                        <input asp-for="TeacherEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <span asp-validation-for="TeacherEmail" class="text-danger"></span>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                    <div>
+                        <label asp-for="TeacherLogin" class="form-label mt-4" >Login</label>
+                        <input asp-for="TeacherLogin" class="form-control" placeholder="Login" />
+                        <span asp-validation-for="TeacherLogin" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="TeacherPassword" class="form-label mt-4" for="inputDefault">Default input</label>
+                          <input asp-for="TeacherPassword" type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                    </div>
+                    <div>
+                        <label asp-for="TeacherFullName" class="form-label mt-4" for="inputDefault">Default input</label>
+                        <input asp-for="TeacherFullName" type="text" class="form-control" placeholder="Default input" id="inputDefault">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="submit" value="Save"  class="btn btn-primary" />
+                        <button type="button" class="btn btn-link" style="float: right"><a asp-action="Index">Back to List</a></button>
+                    </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

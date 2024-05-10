@@ -1,0 +1,81 @@
+@model IEnumerable<Project.Models.Class>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script src="~/js/FileSaver.js"></script>
+
+<script>
+    function fnExcelReport(id, name) {
+        var tab_text = '<html xmlns: x="urn:schemas-microsoft-com:office:excel">';
+        tab_text = tab_text + '<head><xml><x: ExcelWorkbook><x: ExcelWorksheets><x: ExcelWorksheet>';
+        tab_text = tab_text + '<x: Name>Test Sheet</x: Name>';
+        tab_text = tab_text + '<x: WorksheetOptions><x: Panes></x: Panes></x: WorksheetOptions ></x: ExcelWorksheet > ';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+        tab_text = tab_text + "<table border='1px' style='color:black'>";
+
+
+        var exportTable = $('#' + id).clone();
+        exportTable.find('th').last().remove();
+        exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
+        exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
+
+        tab_text = tab_text + exportTable.html();
+        tab_text = tab_text + '</table></body></html>';
+        var fileName = "Class" + '.xls';
+
+        //Save the file
+        var blob = new Blob([tab_text], { type: "application/vnd.ms-excel;charset=utf-8" })
+        window.saveAs(blob, fileName);
+    }
+</script>
+
+<h2>Index</h2>
+
+<button type="button" class="btn btn-primary">
+    <a asp-action="Create" class="nav-link">Create New</a>
+</button>
+<br>
+<br>
+<table class="table table-hover" style="color:#FFBF00; padding-top: 10px" id="dataTable">
+    <thead>
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.ClassId)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.ClassName)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Teacher.TeacherFullName)
+        </th>
+        <th scope="col">
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.TeacherFullName)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ClassId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ClassId">Delete</a>
+            </td>
+            
+        </tr>
+    }
+    </tbody>
+</table>
+
+<button class="btn btn-primary" onclick="javascript: fnExcelReport('dataTable', 'data')">Export To Excel</button>
